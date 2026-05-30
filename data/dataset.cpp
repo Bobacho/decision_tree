@@ -1,6 +1,5 @@
 #include "dataset.hpp"
 #include <optional>
-#include <string_view>
 #ifndef random_h
 #define random_h
 #include <random>
@@ -16,6 +15,8 @@
 #endif
 
 Dataset::Dataset(const size_t &labelTarget) { this->labelTarget = labelTarget; }
+
+Dataset::Dataset() {}
 
 Dataset::Dataset(const size_t &labelTarget, const std::string &path) {
   this->labelTarget = labelTarget;
@@ -129,4 +130,8 @@ const std::unique_ptr<Dataset> Dataset::subset() const {
   dataset.values = values;
   dataset.labels = this->labels;
   return std::make_unique<Dataset>(dataset);
+}
+
+void Dataset::addValues(std::vector<float> row) {
+  this->values.push_back(std::move(row));
 }

@@ -1,5 +1,6 @@
 #include "data/dataset.hpp"
 #include "engine/decision_tree.hpp"
+#include "ensemble/adaboost.hpp"
 #include "graphics/graphics.hpp"
 #include <iostream>
 #include <memory>
@@ -23,7 +24,8 @@ int main(int argc, char **argv) {
 
   Graphics g = Graphics();
 
-  std::unique_ptr<Dataset> dataset = std::make_unique<Dataset>(5, "./data.csv");
+  std::unique_ptr<Dataset> dataset =
+      std::make_unique<Dataset>(5, "./heart.csv");
   dataset->buildTest(0.8);
 
   dataset_summary(*dataset);
@@ -35,8 +37,15 @@ int main(int argc, char **argv) {
   decisiontree->print_tree();
   auto prediction = decisiontree->predict(*dataset->subset());
   printValues(*dataset->subset()->get_values());
+  std::cout << "Prediccion del Decision Tree:\n";
   printVector(prediction);
   decisiontree->draw(g);
+  auto adaboost = std::make_shared<AdaBoost>(5);
+  adaboost->train(*dataset);
+
+  prediction = adaboost->predict(*dataset->subset());
+  std::cout << "Prediccion del Adaboost:\n";
+  printVector(prediction);
   g.show();
 }
 

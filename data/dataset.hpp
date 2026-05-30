@@ -19,6 +19,7 @@ class Dataset {
   Dataset(const size_t &labelTarget);
 
 public:
+  Dataset();
   Dataset(const size_t &labelTarget, const std::string &path);
   void buildTest(const float &testLikelihood);
 
