@@ -40,6 +40,7 @@ g++ -std=c++17 \
     engine/decision_tree.cpp \
     graphics/graphics.cpp \
     graphics/request.cpp \
+    ensemble/adaboost.cpp \
     -o decision_tree \
     -lGL -lglut -lm
 ```
@@ -53,6 +54,7 @@ clang++ -std=c++17 \
     engine/decision_tree.cpp \
     graphics/graphics.cpp \
     graphics/request.cpp \
+    ensemble/adaboost.cpp \
     -o decision_tree \
     -lGL -lglut -lm
 ```
